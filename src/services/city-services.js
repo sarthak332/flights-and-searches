@@ -6,7 +6,6 @@ class CityServices{
     };
 
     async createCity(data){
-        console.log(data)
         const city = await this.cityRepository.createCity(data);
         return city;
     }
@@ -21,8 +20,8 @@ class CityServices{
        return city;
     }
     
-     async updateCity(userId, data){
-       const city = await this.cityRepository.updateCity(userId, data);
+     async updateCity(cityId, data){
+       const city = await this.cityRepository.updateCity(cityId, data);
        return city;
      }
 

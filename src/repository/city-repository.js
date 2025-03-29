@@ -5,56 +5,62 @@ class CityRepository {
     async createCity({name}) {
         try {
             const city = await City.create({ name }); // Pass an object with key-value pair
-            console.log("City created:", city.toJSON()); // Log the created city
             return city;
         } catch (error) {
-            console.error("Error creating city:", error);
-            throw error;
+            console.error("Something went wrong in the repository");
+            throw {error};
         }
     }
-
     async deleteCity(cityId) {
         try {
-            const deletedRows = await City.destroy({
+            const response = await City.destroy({
                 where: { id: cityId },
             });
-            return true;
+            return response;
         } catch (error) {
-            console.error("Error deleting city:", error);
-            throw error;
+            console.error("Something went wrong in the repository");
+            throw {error};
         }
     }
 
-     async updateCity(newData, userid){
+     async updateCity(cityId, data){ // {name : pryagraj}
         try{
-        const city = await City.update(newData, {
-            where : {
-                id : userid
-            }
-        });
+        // const city = await City.update(data, {
+        //     where : {
+        //         id : cityId
+        //     }
+        // });
+        const city = await City.findByPk(cityId); 
+        if (!city) {
+          throw new Error(`City with ID ${cityId} not found`);
+        }
+        city.name = data.name;
+        await city.save();
         return city;
         }catch(error){
-            console.error("Error deleting city:", error);
-            throw error;
+            console.error("Something went wrong in the repository");
+            throw {error};
         }
      }
      
-     async getCity(userid){
-       try{ const city = await City.findByPk(userid);
-        return city}
+     async getCity(cityId){
+       try{ 
+        const city = await City.findByPk(cityId);
+        return city
+    }
         catch(error){
-            console.log(error);
-            throw error;
+            console.log("Something went wrong in the repository");
+            throw {error};
         }
      }
 
      async getAllCities(){
         try{
-          const data = await City.findAll();
-          return data;
+          const city = await City.findAll();
+          return city;
         }catch(error){
-            console.log(error);
-            throw error;
+            console.log("Something went wrong in the repository");
+            throw {error};
         }
      }
 }
