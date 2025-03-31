@@ -13,36 +13,36 @@ module.exports = {
      * }], {});
     */
 
-    await queryInterface.bulkInsert("Airports",[
-      {
-         name : "chhatrapati shivaji maharaj international airport",
-         address : null,
-         cityId : 35,
-         createdAt: new Date(),
-         updatedAt: new Date()
-      },
-      {
-        name : "Hubli",
-        address : null,
-        cityId : 34,
-        createdAt: new Date(),
-        updatedAt: new Date()
-     },
-     {
-      name : "Shravasti Airport",
-      address : null,
-      cityId : 36,
-      createdAt: new Date(),
-      updatedAt: new Date()
-   },
-   {
-    name : "chhatrapati shivaji maharaj",
-    address : null,
-    cityId : 35,
-    createdAt: new Date(),
-    updatedAt: new Date()
- }
-  ], {})
+//     await queryInterface.bulkInsert("Airports",[
+//       {
+//          name : "chhatrapati shivaji maharaj international airport",
+//          address : null,
+//          cityId : 35,
+//          createdAt: new Date(),
+//          updatedAt: new Date()
+//       },
+//       {
+//         name : "Hubli",
+//         address : null,
+//         cityId : 34,
+//         createdAt: new Date(),
+//         updatedAt: new Date()
+//      },
+//      {
+//       name : "Shravasti Airport",
+//       address : null,
+//       cityId : 36,
+//       createdAt: new Date(),
+//       updatedAt: new Date()
+//    },
+//    {
+//     name : "chhatrapati shivaji maharaj",
+//     address : null,
+//     cityId : 35,
+//     createdAt: new Date(),
+//     updatedAt: new Date()
+//  }
+//   ], {})
 
   },
 
