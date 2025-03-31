@@ -21,6 +21,26 @@ const create = async (req, res) => {
     });
   }
 };
+// post : create/bulk
+const createInOneGo = async(req, res) => {
+  try{
+  const { airport } = req.body;
+  const  bulkCity = await cityServices.bulkCreation(airport);
+  res.status(201).json({
+    data: bulkCity,
+    success: true,
+    message: "city is saved on database",
+    err: {},
+  })
+  }catch(error){
+    res.status(500).json({
+      data: {},
+      success: false,
+      message: "not able to create a city",
+      err: error,
+    })
+  }
+};
 //DELETE.-> /city/:userId
 const destroy = async (req, res) => {
   try {
@@ -77,7 +97,7 @@ const getCity = async (req, res) => {
 const getingAll = async (req, res) => {
   try {
     const cities = await cityServices.getAllCities(); // Fixed Wholeget() → cityServices.getAllCities()
-      res.status(200).json({
+    res.status(200).json({
       status: true,
       message: "Complete data retrieved",
       data: cities,
@@ -93,6 +113,7 @@ const getingAll = async (req, res) => {
 };
 module.exports = {
   create,
+  createInOneGo,
   updateCity,
   destroy,
   getingAll,

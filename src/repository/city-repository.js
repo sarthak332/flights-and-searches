@@ -63,6 +63,15 @@ class CityRepository {
             throw {error};
         }
      }
+     async bulkCityCreate(data){
+        try{
+           const city = City.bulkCreate(data);
+           return city;
+        }catch(error){
+            console.log("Something went wrong in the repository");
+            throw {error};
+        }
+     }
 }
 
 module.exports = CityRepository;
