@@ -1,21 +1,25 @@
-const {FlightRepository, AiroplaneRepository} = require("../repository/index");
+const { Flightrepository, AiroplaneRepository } = require("../repository/index");
 
-class FlightService{
-    constructor(){
-        this.airoplaneRepository = new AiroplaneRepository;
-        this.flightRepository  = new FlightRepository;
+class FlightService {
+    constructor() {
+        this.airoplaneRepository = new AiroplaneRepository();
+        this.flightRepository = new Flightrepository();
     }
-    async create(data){
-        try{
-        const Airplanedata = await this.airoplaneRepository.create(data.airoplaneId);
-        const response = await this.flightRepository({...data, totalSeats:Airplanedata.capacity});
-        return response;
-        }catch(error){
-            console.log("SomeThing Went Wrong  Overhere");
-            throw {error};
+
+    async create(data) {
+        try {
+            const Airplanedata = await this.airoplaneRepository.getAirplane(data.airplaneId);
+            const response = await this.flightRepository.create({
+                ...data,
+                totalSeats: Airplanedata.capacity,
+            });
+
+            return response;
+        } catch (error) {
+            console.log("Something Went Wrong Overhere!!!!!", error);
+            throw error;
         }
     }
-
 }
 
 module.exports = FlightService;

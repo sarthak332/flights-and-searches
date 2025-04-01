@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Airoplane.init({
     modelNumber:{
-      tyoe: DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull : false,
     },
     capacity:{
