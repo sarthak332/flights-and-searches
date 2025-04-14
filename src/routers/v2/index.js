@@ -1,15 +1,15 @@
 const express = require("express");
 const {
     create, 
-    getAirport,
+    get,
     destroy,
     update
     } = require("../../controller/airport-controller");
 const router = express.Router();
 
 router.post("/airport/create", create);
-router.get("/airport/:id", getAirport);
+router.get("/airport/:id", get);
 router.delete("/airport/:id", destroy);
-router.patch("/airairport/:id",update);
+router.patch("/airport/:id",update);
 
 module.exports = router;

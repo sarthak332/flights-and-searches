@@ -5,7 +5,7 @@ const airportService = new AirportService();
 //  POST /create
 const create = async (req, res) => {
   try {
-    const response = await airportService.createAirport(req.body);
+    const response = await airportService.create(req.body);
     res.status(201).json({
       data: response,
       success: true,
@@ -24,7 +24,7 @@ const create = async (req, res) => {
 };
 const destroy = async (req, res) => {
     try {
-      const response = await airportService.deleteAirport(req.params.id);
+      const response = await airportService.destroy(req.params.id);
       res.status(200).json({
         data: response,
         success: true,
@@ -43,7 +43,7 @@ const destroy = async (req, res) => {
 
 const update =async(req, res)=>{
     try {
-        const response = await airportService.updateAirport(req.params.id, req.body);
+        const response = await airportService.update(req.params.id, req.body);
         res.status(200).json({
           data: response,
           success: true,
@@ -59,9 +59,9 @@ const update =async(req, res)=>{
         });
       }
 };
-const getAirport =async(req, res)=>{
+const get =async(req, res)=>{
     try {
-        const response = await airportService.getData(req.params.id);
+        const response = await airportService.get(req.params.id);
         res.status(200).json({
           data: response,
           success: true,
@@ -81,5 +81,5 @@ module.exports = {
     create,
     destroy,
     update,
-    getAirport
+    get
 }

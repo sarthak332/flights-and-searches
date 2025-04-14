@@ -1,10 +1,11 @@
 const { FlightService } = require("../services/index");
+const {SuccessCodes} = require("../utils/error-code");
 const flightService = new FlightService();
 
 const create = async (req, res) => {
   try {
-    const response = await flightService.create(req.body);
-    return res.status(201).json({
+    const response = await flightService.create(req.body, req.headers);
+    return res.status(SuccessCodes.CREATED).json({
       data: response,
       success: true,
       message: "Flight is saved in database",
@@ -15,16 +16,16 @@ const create = async (req, res) => {
       data: {},
       success: false,
       message: "Something Wrong in data",
-      err: error,
+      err: error.message,
     });
   }
 };
 
-const getFlight = async (req, res) => {
+const getAllFlight = async (req, res) => {
   try {
-    console.log(req.query)
-    const response = await flightService.getFlight(req.query);
-    return res.status(201).json({
+    console.log(req.query);
+    const response = await flightService.getAllFlight(req.query);
+    return res.status(SuccessCodes.OK).json({
       data: response,
       success: true,
       message: "Flight is fetched!!",
@@ -40,7 +41,47 @@ const getFlight = async (req, res) => {
   }
 };
 
+const getflight = async(req, res)=>{
+  try {
+    const response = await flightService.getflight(req.params.id);
+    return res.status(SuccessCodes.OK).json({
+      data: response,
+      success: true,
+      message: "Flight is fetched!!",
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "Something Wrong in filters data",
+      err: error,
+    });
+  }
+}
+
+const update = async(req, res)=>{
+   try {
+    const response = await flightService.updateFlight(req.params.id, req.body);
+    return res.status(SuccessCodes.OK).json({
+      data: response,
+      success: true,
+      message: "Flight is fetched!!",
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "Something Wrong in filters data",
+      err: error,
+    });
+  }
+}
+
 module.exports = {
   create,
-  getFlight
+  getAllFlight,
+  getflight,
+  update
 };

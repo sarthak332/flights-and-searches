@@ -1,5 +1,6 @@
 const { where } = require("sequelize");
 const { City } = require("../models/index");
+const { ValidationError, AppError } = require("../utils/index");
 
 class CityRepository {
     async createCity({name}) {
@@ -7,11 +8,16 @@ class CityRepository {
             const city = await City.create({ name }); // Pass an object with key-value pair
             return city;
         } catch (error) {
-            console.error("Something went wrong in the repository");
-            throw {error};
+            if (error.name === "SequelizeValidationError") {
+                throw new ValidationError(error);
+              }
+              throw new AppError(
+                "Something went wrong",
+                "Something went wrong in the repository layer"
+              );
         }
     }
-    async deleteCity(cityId) {
+    async destroy(cityId) {
         try {
             const response = await City.destroy({
                 where: { id: cityId },

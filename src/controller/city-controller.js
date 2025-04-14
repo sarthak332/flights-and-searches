@@ -1,11 +1,11 @@
 const { CityServices } = require("../services/index");
 const cityServices = new CityServices();
-
+const {SuccessCodes} = require("../utils/error-code");
 // POST ->/create
 const create = async (req, res) => {
   try {
     const city = await cityServices.createCity(req.body);
-    res.status(201).json({
+    res.status(SuccessCodes.CREATED).json({
       data: city,
       success: true,
       message: "city is saved on database",
@@ -26,7 +26,7 @@ const createInOneGo = async(req, res) => {
   try{
   const { airport } = req.body;
   const  bulkCity = await cityServices.bulkCreation(airport);
-  res.status(201).json({
+  res.status(SuccessCodes.CREATED).json({
     data: bulkCity,
     success: true,
     message: "city is saved on database",
@@ -44,8 +44,8 @@ const createInOneGo = async(req, res) => {
 //DELETE.-> /city/:userId
 const destroy = async (req, res) => {
   try {
-    const response = await cityServices.deleteCity(req.params.id);
-    res.status(200).json({
+    const response = await cityServices.destroy(req.params.id);
+    res.status(SuccessCodes.OK).json({
       data: response,
       status: true,
       message: "deleted Successfully",

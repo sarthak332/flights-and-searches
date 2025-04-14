@@ -24,9 +24,14 @@ class CityServices {
     }
   }
 
-  async deleteCity(userId) {
-    const city = await this.cityRepository.deleteCity(userId);
-    return true;
+  async destroy(userId) {
+    try {
+      await this.cityRepository.destroy(userId);
+      return true;
+    } catch (error) {
+      console.log("Something went wrong Service Layer");
+      throw { error };
+    }
   }
 
   async getCity(userId) {
