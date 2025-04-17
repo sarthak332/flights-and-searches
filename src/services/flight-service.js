@@ -12,10 +12,12 @@ class FlightService {
   }
   async create(data, header) {
     try {
+      const token = req.headers["x-auth-token"];
       const isAdmin = await axios.post(
         `${AUTH_SERVICE_PATH}/api/v1/isAuthenticatedAdmin`,{},
-        {headers: { 
-          "x-auth-token": header["x-auth-token"] 
+        { 
+          headers: { 
+          "x-auth-token": token 
         }
       }
       );
